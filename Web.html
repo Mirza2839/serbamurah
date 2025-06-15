@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SerbaMurah.ID</title>
+<link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Mirza2839/serbamurah.github.io/refs/heads/main/favicon.ico">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid #4CAF50; /* Warna border bisa diganti */
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        p.bio {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+        .search-container {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        #searchInput {
+            width: calc(100% - 20px);
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+            padding-left: 40px; /* Ruang untuk ikon search */
+        }
+        .search-container::before {
+            content: '🔍'; /* Ikon search */
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 1.1em;
+        }
+
+        .link-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .link-item {
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease-out; /* Animasi fade-in */
+        }
+        .link-item a {
+            display: block;
+            background-color: #4CAF50; /* Warna utama Link */
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .link-item a:hover {
+            background-color: #45a049; /* Warna hover Link */
+            transform: translateY(-2px);
+        }
+        .link-item.hidden {
+            display: none;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Media queries untuk responsif */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            .profile-img {
+                width: 80px;
+                height: 80px;
+            }
+            .link-item a {
+                padding: 12px 15px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://raw.githubusercontent.com/Mirza2839/serbamurah.github.io/refs/heads/main/profile.jpg" alt="Foto Profil" class="profile-img">
+        <h1>SerbaMurah.ID</h1>
+        <p class="bio">
+            Toko serba ada, harga bersahabat.<br>
+Klik link di bawah dan temukan barang-barang unik pilihan!<br>
+👇👇👇
+        </p>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Cari link...">
+        </div>
+
+        <ul class="link-list" id="linkList">
+            <li class="link-item"><a href="https://www.instagram.com/namakamu/" target="_blank">Instagramku</a></li>
+            <li class="link-item"><a href="https://www.youtube.com/channel/namakamu" target="_blank">Channel YouTube</a></li>
+            <li class="link-item"><a href="https://tokopedia.com/namatoko" target="_blank">Toko Onlineku (Tokopedia)</a></li>
+            <li class="link-item"><a href="https://www.linkedin.com/in/namakamu/" target="_blank">Profil LinkedIn</a></li>
+            <li class="link-item"><a href="https://namablogkamu.com/" target="_blank">Blog Pribadiku</a></li>
+            <li class="link-item"><a href="mailto:emailmu@example.com">Email Kontak</a></li>
+            <li class="link-item"><a href="https://wa.me/6281234567890" target="_blank">Hubungi via WhatsApp</a></li>
+            <li class="link-item"><a href="https://www.tiktok.com/@namakamu" target="_blank">TikTok Saya</a></li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const linkList = document.getElementById('linkList');
+            const linkItems = linkList.getElementsByClassName('link-item');
+
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = searchInput.value.toLowerCase(); // Ambil input dan ubah ke huruf kecil
+
+                for (let i = 0; i < linkItems.length; i++) {
+                    const linkItem = linkItems[i];
+                    const linkText = linkItem.querySelector('a').textContent.toLowerCase(); // Ambil teks link
+                    
+                    // Jika teks link mengandung searchTerm, tampilkan. Kalau tidak, sembunyikan.
+                    if (linkText.includes(searchTerm)) {
+                        linkItem.classList.remove('hidden');
+                    } else {
+                        linkItem.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
